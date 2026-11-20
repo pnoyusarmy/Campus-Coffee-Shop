@@ -1,0 +1,72 @@
+# Campus Coffee Shop - Ordering Prototype
+# CSC-154 - Alfie Balingao
+# A simple text menu where a customer can order drinks and check out.
+
+MENU = {
+    1: ("Coffee", 2.50),
+    2: ("Latte", 3.75),
+    3: ("Tea", 2.00),
+}
+
+
+def show_menu():
+    print("\n=== Campus Coffee Shop ===")
+    for number, (name, price) in MENU.items():
+        print(f"{number}. {name} - ${price:.2f}")
+    print("4. View my order")
+    print("5. Checkout and exit")
+
+
+def get_choice():
+    choice = input("Enter a number (1-5): ").strip()
+
+    # Edge case: letters, symbols, decimals, or nothing at all
+    if not choice.isdigit():
+        print("Invalid input. Please type a number from 1 to 5.")
+        return None
+
+    choice = int(choice)
+
+    # Edge case: a number that isn't on the menu
+    if choice < 1 or choice > 5:
+        print("Invalid choice. Please pick a number from 1 to 5.")
+        return None
+
+    return choice
+
+
+def show_order(order):
+    if not order:
+        print("Your order is empty.")
+        return
+    print("\nYour order:")
+    for name, price in order:
+        print(f"- {name} ${price:.2f}")
+    total = sum(price for name, price in order)
+    print(f"Total: ${total:.2f}")
+
+
+def main():
+    order = []
+
+    while True:
+        show_menu()
+        choice = get_choice()
+
+        if choice is None:
+            continue
+
+        if choice in MENU:
+            name, price = MENU[choice]
+            order.append((name, price))
+            print(f"Success! 1 {name} added to your order.")
+        elif choice == 4:
+            show_order(order)
+        elif choice == 5:
+            show_order(order)
+            print("Thanks for ordering. Goodbye!")
+            break
+
+
+if __name__ == "__main__":
+    main()
