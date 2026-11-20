@@ -1,4 +1,4 @@
-# Campus-Coffee-Shop
+# Campus Coffee Shop
 A simple text menu where a customer can order drinks and check out
 
 Test Case 1 Ordering a coffee (normal case) 
